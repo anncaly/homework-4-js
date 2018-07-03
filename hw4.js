@@ -1,20 +1,20 @@
 // task 1
 
-function largest() {
-  let max = arguments[0];
-	for (let i = 1; i < arguments.length; i++) {
-  	if (arguments[i] > max) {
-    	max = arguments[i];
+function largest(...args) {
+  let max = args[0];
+	for (let i = 1; i < args.length; i++) {
+  	if (args[i] > max) {
+    	max = args[i];
   	}
   } 
   return max;
 }
 
-function smallest() {
-	let min = arguments[0];
-	for (let i = 1; i < arguments.length; i++) {
-  	if (arguments[i] < min) {
-    	min = arguments[i];
+function smallest(...args) {
+	let min = args[0];
+	for (let i = 1; i < args.length; i++) {
+  	if (args[i] < min) {
+    	min = args[i];
   	}
   } 
   return min;
@@ -36,12 +36,23 @@ console.log(newArray[4]());
 
 // task 3
 
-function sum() {
-  let res = 0;
-  for(let i = 0; i < arguments.length; i++) {
-    res += arguments[i];
+// sum with reduce / without recursion
+
+function sum(...args) {
+  return args.reduce(function(sum, current) {
+    return sum + current;
+  }, 0);
+}
+console.log(sum(1,3,5,7));
+
+// sum with recursion
+
+function sum(...args) {
+  if(args.length > 0) {
+    return args[0] + sum(...args.slice(1));
+  } else {
+    return 0;
   }
-  return res;
 }
 console.log(sum(1,3,5,7));
 
